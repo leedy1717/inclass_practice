@@ -1,0 +1,1963 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Better Study Habits</title>
+
+<style>
+:root {
+  --pink: #ff91b8;
+  --pink-light: #fff0f6;
+  --purple: #a78bfa;
+  --purple-light: #f2edff;
+  --yellow: #ffe68a;
+  --mint: #a7ead4;
+  --blue: #a9d9ff;
+  --ink: #413c59;
+  --muted: #827c98;
+  --white: #ffffff;
+  --green: #31a879;
+  --red: #e86f83;
+  --shadow: 0 8px 24px rgba(87, 65, 120, 0.09);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #fff9fc;
+  color: var(--ink);
+  font-family: "Trebuchet MS", "Malgun Gothic", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+button, input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #8d76e8;
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.app {
+  width: min(100% - 28px, 1040px);
+  margin: 0 auto;
+  padding: 20px 0 48px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 15px;
+  background: var(--yellow);
+  font-size: 23px;
+}
+
+.top-stats {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.stat-pill {
+  background: white;
+  border: 1px solid #f2e6f1;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(125deg, #ffe5ef 0%, #f1eaff 58%, #e4f5ff 100%);
+  border-radius: 28px;
+  padding: 30px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow);
+}
+
+.hero::after {
+  content: "✦";
+  position: absolute;
+  right: 30px;
+  top: 8px;
+  font-size: 100px;
+  color: rgba(255,255,255,0.65);
+  transform: rotate(12deg);
+}
+
+.eyebrow {
+  display: inline-block;
+  background: rgba(255,255,255,0.75);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+  color: #795ba7;
+}
+
+.hero h1 {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(27px, 5vw, 42px);
+  line-height: 1.2;
+  margin: 13px 0 10px;
+  letter-spacing: -1px;
+}
+
+.hero p {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  margin: 0;
+  color: #665d7f;
+  font-size: 15px;
+}
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.hero-steps {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hero-step {
+  background: rgba(255,255,255,0.8);
+  border-radius: 12px;
+  padding: 7px 11px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.hero-character {
+  font-size: 62px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.progress-card {
+  padding: 17px 20px;
+  background: white;
+  border: 1px solid #f2e6f1;
+  border-radius: 19px;
+  margin-bottom: 22px;
+}
+
+.progress-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.progress-track {
+  height: 11px;
+  background: #f3edf6;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--pink), var(--purple));
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 12px;
+  margin: 25px 0 14px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: -0.5px;
+}
+
+.section-heading p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.small-label {
+  background: var(--purple-light);
+  color: #795ba7;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.expression-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.expression-card {
+  text-align: left;
+  border: 2px solid transparent;
+  background: white;
+  border-radius: 20px;
+  padding: 17px;
+  box-shadow: var(--shadow);
+  transition: transform 0.18s, border-color 0.18s;
+  color: var(--ink);
+  min-width: 0;
+}
+
+.expression-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--pink);
+}
+
+.expression-card.active {
+  border-color: var(--purple);
+  background: #fcfaff;
+}
+
+.card-number {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: var(--pink-light);
+  color: #b74c79;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.card-emoji {
+  float: right;
+  font-size: 25px;
+}
+
+.card-expression {
+  display: block;
+  margin-top: 13px;
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.card-meaning {
+  display: block;
+  color: var(--muted);
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.card-status {
+  display: block;
+  margin-top: 13px;
+  color: #8a70c5;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.panel {
+  background: white;
+  border: 1px solid #f0e6f3;
+  border-radius: 24px;
+  padding: 25px;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+
+.panel-kicker {
+  color: #9876d0;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.detail-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: start;
+  margin-bottom: 18px;
+}
+
+.detail-title h2 {
+  margin: 4px 0 0;
+  font-size: clamp(24px, 4vw, 32px);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.detail-number {
+  flex-shrink: 0;
+  background: var(--yellow);
+  border-radius: 16px;
+  padding: 11px 14px;
+  font-weight: 900;
+}
+
+.detail-meaning {
+  background: var(--pink-light);
+  border-radius: 16px;
+  padding: 15px 18px;
+  margin-bottom: 14px;
+}
+
+.detail-meaning .label,
+.example-box .label {
+  display: block;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  color: #a6537c;
+  margin-bottom: 5px;
+}
+
+.detail-meaning strong {
+  font-size: 19px;
+}
+
+.example-box {
+  background: #f4f0ff;
+  padding: 17px 18px;
+  border-radius: 16px;
+}
+
+.example-box .label {
+  color: #8465b7;
+}
+
+.example-sentence {
+  font-size: 18px;
+  line-height: 1.7;
+  font-weight: 800;
+}
+
+.example-translation {
+  color: #746b8b;
+  margin-top: 7px;
+  font-size: 14px;
+}
+
+.usage-note {
+  background: #f4fbf8;
+  border-left: 4px solid var(--mint);
+  border-radius: 10px;
+  padding: 12px 15px;
+  margin-top: 13px;
+  font-size: 13px;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 19px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 13px;
+  padding: 11px 17px;
+  font-weight: 900;
+  transition: transform 0.15s, filter 0.15s;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(0.98);
+}
+
+.btn-primary {
+  background: var(--purple);
+  color: white;
+}
+
+.btn-pink {
+  background: var(--pink-light);
+  color: #a94771;
+}
+
+.btn-yellow {
+  background: var(--yellow);
+  color: #66521a;
+}
+
+.btn-mint {
+  background: #ddf8ed;
+  color: #277c5b;
+}
+
+.btn-muted {
+  background: #f1edf6;
+  color: #655b78;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.quiz-panel {
+  background: linear-gradient(145deg, #ffffff, #fffaff);
+}
+
+.quiz-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.quiz-tag {
+  display: inline-block;
+  background: #fff0f6;
+  color: #b34e79;
+  padding: 6px 11px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.quiz-counter {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.quiz-question {
+  font-size: clamp(19px, 3.4vw, 25px);
+  line-height: 1.45;
+  margin: 10px 0 18px;
+}
+
+.quiz-subtitle {
+  color: var(--muted);
+  margin-top: -9px;
+  margin-bottom: 17px;
+  font-size: 13px;
+}
+
+.choice-list {
+  display: grid;
+  gap: 10px;
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 12px;
+  width: 100%;
+  background: white;
+  border: 2px solid #eee7f5;
+  border-radius: 15px;
+  padding: 12px 14px;
+  color: var(--ink);
+  font-weight: 800;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.choice:hover:not(:disabled) {
+  border-color: var(--purple);
+  background: #fbf9ff;
+}
+
+.choice-letter {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 31px;
+  height: 31px;
+  border-radius: 10px;
+  background: #f4efff;
+  color: #8265bd;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.choice.correct {
+  background: #edfff7;
+  border-color: #63cba3;
+}
+
+.choice.correct .choice-letter {
+  background: #c8f4e1;
+  color: #267c5b;
+}
+
+.choice.wrong {
+  background: #fff2f4;
+  border-color: #f0a2b0;
+}
+
+.choice.wrong .choice-letter {
+  background: #ffdce3;
+  color: #b9435d;
+}
+
+.feedback {
+  display: none;
+  padding: 14px 16px;
+  margin-top: 15px;
+  border-radius: 15px;
+  font-size: 14px;
+}
+
+.feedback.show {
+  display: block;
+}
+
+.feedback.good {
+  background: #eafff5;
+  color: #236f51;
+}
+
+.feedback.try {
+  background: #fff2f4;
+  color: #9e3f59;
+}
+
+.feedback strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.quiz-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.quiz-actions .btn {
+  flex: 1;
+}
+
+.input-wrap {
+  margin-bottom: 14px;
+}
+
+.answer-input {
+  display: block;
+  width: 100%;
+  border: 2px solid #e9dff2;
+  border-radius: 14px;
+  padding: 14px 15px;
+  color: var(--ink);
+  background: white;
+  font-size: 17px;
+}
+
+.answer-input::placeholder {
+  color: #b2a9bf;
+}
+
+.helper-text {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 7px;
+}
+
+.mode-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.mode-button {
+  border: 1px solid #eee5f3;
+  border-radius: 999px;
+  padding: 7px 13px;
+  color: #6b617d;
+  background: white;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.mode-button.active {
+  background: var(--purple-light);
+  border-color: var(--purple);
+  color: #7556b4;
+}
+
+.story-panel {
+  background: linear-gradient(135deg, #edfff8, #f3f0ff);
+}
+
+.story-panel h2 {
+  margin: 0 0 12px;
+  font-size: 22px;
+}
+
+.story-text {
+  line-height: 2;
+  font-size: 15px;
+}
+
+.story-text strong {
+  background: #fff0a9;
+  border-radius: 5px;
+  padding: 2px 4px;
+}
+
+.story-translation {
+  color: #716982;
+  font-size: 13px;
+  padding-top: 12px;
+  border-top: 1px dashed #d8cfea;
+  margin-top: 15px;
+}
+
+.final-screen {
+  text-align: center;
+  padding: 35px 20px;
+  background: linear-gradient(140deg, #fff0f6, #f0ebff, #e7fff5);
+  border-radius: 25px;
+  margin-bottom: 20px;
+}
+
+.final-emoji {
+  font-size: 70px;
+}
+
+.final-screen h2 {
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+.final-screen p {
+  max-width: 520px;
+  margin: 0 auto 15px;
+  color: #6d647f;
+}
+
+.result-stats {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.result-stat {
+  min-width: 105px;
+  background: rgba(255,255,255,0.8);
+  padding: 13px 17px;
+  border-radius: 16px;
+}
+
+.result-stat strong {
+  display: block;
+  font-size: 24px;
+}
+
+.result-stat span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #9c93aa;
+  padding-top: 10px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 720px) {
+  .expression-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero {
+    padding: 23px;
+  }
+
+  .hero-character {
+    font-size: 48px;
+  }
+
+  .panel {
+    padding: 19px;
+  }
+}
+
+@media (max-width: 430px) {
+  .app {
+    width: min(100% - 20px, 1040px);
+  }
+
+  .brand {
+    font-size: 12px;
+  }
+
+  .brand-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .stat-pill {
+    font-size: 11px;
+    padding: 6px 9px;
+  }
+
+  .hero-bottom {
+    align-items: center;
+  }
+
+  .hero-step {
+    font-size: 10px;
+    padding: 6px 8px;
+  }
+
+  .expression-card {
+    padding: 13px;
+  }
+
+  .card-expression {
+    font-size: 16px;
+  }
+
+  .quiz-actions {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon">🌷</div>
+      <span>MY LITTLE ENGLISH CLUB</span>
+    </div>
+
+    <div class="top-stats">
+      <div class="stat-pill">⭐ <span id="score">0</span> pts</div>
+      <div class="stat-pill">📚 <span id="learnedCount">0</span>/6</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="eyebrow">ENGLISH MINI MISSION ✨</span>
+    <h1>Building Better<br>Study Habits!</h1>
+    <p>
+      Small steps, better habits! 🌱<br>
+      Learn six useful English expressions and become a study-habit superstar.
+    </p>
+
+    <div class="hero-bottom">
+      <div class="hero-steps">
+        <span class="hero-step">📖 Learn</span>
+        <span class="hero-step">✏️ Practice</span>
+        <span class="hero-step">🏆 Master</span>
+      </div>
+      <div class="hero-character" aria-hidden="true">🐰📚</div>
+    </div>
+  </section>
+
+  <section class="progress-card" aria-label="Learning progress">
+    <div class="progress-head">
+      <span>🌈 Your learning journey</span>
+      <span id="progressText">0% complete</span>
+    </div>
+    <div
+      class="progress-track"
+      role="progressbar"
+      aria-label="Learning progress"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+      id="progressBar"
+    >
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <div>
+        <h2>01. Meet the Expressions 🌼</h2>
+        <p>Tap a card to learn its spelling, meaning, and example.</p>
+      </div>
+      <span class="small-label">6 EXPRESSIONS</span>
+    </div>
+
+    <div class="expression-grid" id="expressionGrid"></div>
+  </section>
+
+  <section class="panel" id="detailPanel" aria-live="polite">
+    <div class="detail-title">
+      <div>
+        <div class="panel-kicker">YOUR WORD CARD ✨</div>
+        <h2 id="detailExpression">keep track of</h2>
+      </div>
+      <div class="detail-number" id="detailNumber">01 / 06</div>
+    </div>
+
+    <div class="detail-meaning">
+      <span class="label">🇰🇷 KOREAN MEANING</span>
+      <strong id="detailMeaning">~을 기록하다, ~을 계속 확인하다</strong>
+    </div>
+
+    <div class="example-box">
+      <span class="label">💬 EXAMPLE SENTENCE</span>
+      <div class="example-sentence" id="detailExample">
+        I keep track of how long I study every day.
+      </div>
+      <div class="example-translation" id="detailTranslation">
+        나는 매일 얼마나 오래 공부하는지 기록한다.
+      </div>
+
+      <div class="button-row">
+        <button class="btn btn-pink" id="listenButton">
+          🔊 Listen
+        </button>
+        <button class="btn btn-muted" id="slowListenButton">
+          🐢 Listen Slowly
+        </button>
+      </div>
+    </div>
+
+    <div class="usage-note">
+      <strong>💡 Remember!</strong>
+      <span id="detailTip">
+        Keep track of + a noun or a question word clause.
+      </span>
+    </div>
+
+    <div class="button-row">
+      <button class="btn btn-muted" id="prevCard">← Previous</button>
+      <button class="btn btn-primary" id="nextCard">Next Expression →</button>
+    </div>
+  </section>
+
+  <section class="panel story-panel">
+    <div class="panel-kicker">READING TIME 📚</div>
+    <h2>Jisoo's Study-Habit Story</h2>
+
+    <div class="story-text">
+      Jisoo wanted to improve her study habits before the exam period.
+      She began to <strong>keep track of</strong> how long she studied each day.
+      She also learned when to <strong>take a break</strong> instead of studying for too long.
+      While studying, she tried to <strong>stay away from</strong> her phone and made sure to
+      <strong>get enough sleep</strong>.
+      When she felt stressed, she learned how to <strong>deal with</strong> it by taking a short walk.
+      After several weeks, she found it easier to <strong>stick to</strong> her new routine.
+    </div>
+
+    <div class="story-translation">
+      지수는 시험 기간 전에 자신의 공부 습관을 개선하고 싶었습니다.
+      그녀는 매일 얼마나 오래 공부하는지 기록하기 시작했습니다.
+      또한 너무 오래 공부하는 대신 언제 휴식을 취해야 하는지 배웠습니다.
+      공부하는 동안 휴대전화에서 멀리 떨어져 있으려고 노력했고 충분히 잠을 자도록 했습니다.
+      스트레스를 받으면 짧은 산책을 하며 스트레스에 대처하는 방법을 배웠습니다.
+      몇 주가 지나자 새로운 일과를 꾸준히 지키는 것이 더 쉬워졌습니다.
+    </div>
+
+    <div class="button-row">
+      <button class="btn btn-mint" id="readStoryButton">
+        🔊 Listen to the Story
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <div>
+        <h2>02. Spelling Challenge ✏️</h2>
+        <p>Look at the meaning and type the correct English expression.</p>
+      </div>
+      <span class="small-label">TYPE IT!</span>
+    </div>
+
+    <div class="panel quiz-panel" id="spellingPanel">
+      <div class="quiz-topline">
+        <span class="quiz-tag">🔤 SPELLING QUIZ</span>
+        <span class="quiz-counter" id="spellingCounter">Question 1 / 6</span>
+      </div>
+
+      <h3 class="quiz-question" id="spellingQuestion">
+        How do you say “~을 기록하다” in English?
+      </h3>
+
+      <p class="quiz-subtitle">
+        Hint: Type the complete expression, including spaces.
+      </p>
+
+      <form id="spellingForm">
+        <div class="input-wrap">
+          <input
+            class="answer-input"
+            id="spellingInput"
+            type="text"
+            placeholder="Type your answer here..."
+            autocomplete="off"
+            autocapitalize="none"
+            spellcheck="false"
+            aria-label="Type the English expression"
+          >
+          <div class="helper-text">
+            Capital letters do not matter. Check your spelling and spaces!
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="checkSpelling">
+          Check My Spelling ✨
+        </button>
+      </form>
+
+      <div class="feedback" id="spellingFeedback" aria-live="polite"></div>
+
+      <div class="quiz-actions hidden" id="spellingActions">
+        <button class="btn btn-muted" id="spellingRetry">Try Again ↻</button>
+        <button class="btn btn-primary" id="spellingNext">Next Question →</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <div>
+        <h2>03. Meaning Match 🍓</h2>
+        <p>Choose the Korean meaning that matches the English expression.</p>
+      </div>
+      <span class="small-label">PICK ONE</span>
+    </div>
+
+    <div class="panel quiz-panel" id="meaningPanel">
+      <div class="quiz-topline">
+        <span class="quiz-tag">🧠 MEANING QUIZ</span>
+        <span class="quiz-counter" id="meaningCounter">Question 1 / 6</span>
+      </div>
+
+      <h3 class="quiz-question" id="meaningQuestion">
+        What does “take a break” mean?
+      </h3>
+
+      <div class="choice-list" id="meaningChoices"></div>
+      <div class="feedback" id="meaningFeedback" aria-live="polite"></div>
+
+      <div class="quiz-actions hidden" id="meaningActions">
+        <button class="btn btn-muted" id="meaningRetry">Try Again ↻</button>
+        <button class="btn btn-primary" id="meaningNext">Next Question →</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <div>
+        <h2>04. Sentence Detective 🔎</h2>
+        <p>Read the context and find the expression that fits best.</p>
+      </div>
+      <span class="small-label">USE IT!</span>
+    </div>
+
+    <div class="panel quiz-panel" id="sentencePanel">
+      <div class="quiz-topline">
+        <span class="quiz-tag">🕵️ CONTEXT QUIZ</span>
+        <span class="quiz-counter" id="sentenceCounter">Question 1 / 6</span>
+      </div>
+
+      <h3 class="quiz-question" id="sentenceQuestion">
+        I write down my study time every day. I ______ how long I study.
+      </h3>
+
+      <p class="quiz-subtitle" id="sentenceTranslation">
+        나는 매일 공부 시간을 적는다. 나는 공부 시간을 기록한다.
+      </p>
+
+      <div class="choice-list" id="sentenceChoices"></div>
+      <div class="feedback" id="sentenceFeedback" aria-live="polite"></div>
+
+      <div class="quiz-actions hidden" id="sentenceActions">
+        <button class="btn btn-muted" id="sentenceRetry">Try Again ↻</button>
+        <button class="btn btn-primary" id="sentenceNext">Next Question →</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-screen hidden" id="finalScreen" aria-live="polite">
+    <div class="final-emoji" id="finalEmoji">🏆</div>
+    <h2 id="finalTitle">Amazing Work!</h2>
+    <p id="finalMessage">
+      You have practiced all six expressions. Keep building your English skills one step at a time!
+    </p>
+
+    <div class="result-stats">
+      <div class="result-stat">
+        <strong id="finalScore">0</strong>
+        <span>Total Points</span>
+      </div>
+      <div class="result-stat">
+        <strong id="finalCorrect">0/18</strong>
+        <span>First-Try Correct</span>
+      </div>
+      <div class="result-stat">
+        <strong id="finalAccuracy">0%</strong>
+        <span>First-Try Accuracy</span>
+      </div>
+    </div>
+
+    <p>🌱 Small steps make a big difference!</p>
+
+    <div class="button-row" style="justify-content:center">
+      <button class="btn btn-primary" id="reviewMissed">
+        Review My Challenges 📖
+      </button>
+      <button class="btn btn-pink" id="restartButton">
+        Play Again ↻
+      </button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    Made with 💗 for English learners · Keep learning, keep growing!
+  </footer>
+
+</div>
+
+<script>
+"use strict";
+
+/* ==========================================
+   1. LEARNING DATA
+========================================== */
+
+const expressions = [
+  {
+    expression: "keep track of",
+    meaning: "~을 기록하다, ~을 계속 확인하다",
+    shortMeaning: "기록하다, 계속 확인하다",
+    emoji: "📝",
+    example: "I keep track of how long I study every day.",
+    translation: "나는 매일 얼마나 오래 공부하는지 기록한다.",
+    tip: "Keep track of + a noun. Example: keep track of time, money, or progress.",
+    spellingPrompt: "How do you say “~을 기록하다, 계속 확인하다” in English?",
+    meaningQuestion: "What does “keep track of” mean?",
+    sentence: "Mina writes down her daily study time. She ______ how long she studies.",
+    sentenceTranslation: "미나는 매일 공부 시간을 적는다. 그녀는 공부 시간을 기록한다.",
+    sentenceAnswer: "keep track of",
+    sentenceExplanation: "She records and checks her study time, so “keep track of” is correct."
+  },
+  {
+    expression: "take a break",
+    meaning: "휴식을 취하다",
+    shortMeaning: "휴식을 취하다",
+    emoji: "🍵",
+    example: "I take a break after studying for an hour.",
+    translation: "나는 한 시간 동안 공부한 후 휴식을 취한다.",
+    tip: "Take a break = stop an activity for a short time to rest.",
+    spellingPrompt: "How do you say “휴식을 취하다” in English?",
+    meaningQuestion: "What does “take a break” mean?",
+    sentence: "I have been studying for two hours. I need to ______.",
+    sentenceTranslation: "나는 두 시간 동안 공부했다. 나는 휴식을 취해야 한다.",
+    sentenceAnswer: "take a break",
+    sentenceExplanation: "The speaker needs to rest after studying for a long time."
+  },
+  {
+    expression: "stay away from",
+    meaning: "~을 멀리하다, ~에 가까이 가지 않다",
+    shortMeaning: "멀리하다",
+    emoji: "📵",
+    example: "I stay away from my phone while I study.",
+    translation: "나는 공부하는 동안 휴대전화를 멀리한다.",
+    tip: "Stay away from + a noun. Example: stay away from distractions.",
+    spellingPrompt: "How do you say “~을 멀리하다” in English?",
+    meaningQuestion: "What does “stay away from” mean?",
+    sentence: "I want to focus on my homework, so I ______ my phone.",
+    sentenceTranslation: "나는 숙제에 집중하고 싶어서 휴대전화를 멀리한다.",
+    sentenceAnswer: "stay away from",
+    sentenceExplanation: "The speaker wants to focus, so they avoid being near their phone."
+  },
+  {
+    expression: "get enough sleep",
+    meaning: "충분히 잠을 자다",
+    shortMeaning: "충분히 자다",
+    emoji: "🌙",
+    example: "I try to get enough sleep before an exam.",
+    translation: "나는 시험 전에 충분히 자려고 노력한다.",
+    tip: "Get enough sleep = sleep for the amount of time your body needs.",
+    spellingPrompt: "How do you say “충분히 잠을 자다” in English?",
+    meaningQuestion: "What does “get enough sleep” mean?",
+    sentence: "I want to feel rested tomorrow, so I try to ______ every night.",
+    sentenceTranslation: "나는 내일 개운한 기분을 느끼고 싶어서 매일 밤 충분히 자려고 한다.",
+    sentenceAnswer: "get enough sleep",
+    sentenceExplanation: "Sleeping enough helps you feel rested and ready for the next day."
+  },
+  {
+    expression: "deal with",
+    meaning: "~에 대처하다, ~을 처리하다",
+    shortMeaning: "대처하다, 처리하다",
+    emoji: "🌈",
+    example: "I take a short walk to deal with stress.",
+    translation: "나는 스트레스에 대처하기 위해 짧은 산책을 한다.",
+    tip: "Deal with + a problem, a situation, or a feeling. Example: deal with stress.",
+    spellingPrompt: "How do you say “~에 대처하다, ~을 처리하다” in English?",
+    meaningQuestion: "What does “deal with” mean?",
+    sentence: "When I feel stressed, I take a walk to ______ it.",
+    sentenceTranslation: "나는 스트레스를 받을 때 그것에 대처하기 위해 산책한다.",
+    sentenceAnswer: "deal with",
+    sentenceExplanation: "The speaker takes a walk to manage or cope with stress."
+  },
+  {
+    expression: "stick to",
+    meaning: "~을 꾸준히 지키다, ~을 고수하다",
+    shortMeaning: "꾸준히 지키다",
+    emoji: "🌱",
+    example: "I stick to my study plan every week.",
+    translation: "나는 매주 나의 공부 계획을 꾸준히 지킨다.",
+    tip: "Stick to + a plan, a schedule, or a routine.",
+    spellingPrompt: "How do you say “계획이나 일과를 꾸준히 지키다” in English?",
+    meaningQuestion: "What does “stick to” mean?",
+    sentence: "Jisoo follows the same study schedule every day. She ______ her routine.",
+    sentenceTranslation: "지수는 매일 같은 공부 일정을 따른다. 그녀는 자신의 일과를 꾸준히 지킨다.",
+    sentenceAnswer: "stick to",
+    sentenceExplanation: "She continues following her routine instead of giving it up."
+  }
+];
+
+const meaningDistractors = {
+  "keep track of": [
+    "휴식을 취하다",
+    "충분히 잠을 자다",
+    "기록하고 계속 확인하다",
+    "계획을 꾸준히 지키다"
+  ],
+  "take a break": [
+    "스트레스에 대처하다",
+    "휴식을 취하다",
+    "휴대전화를 멀리하다",
+    "공부 시간을 기록하다"
+  ],
+  "stay away from": [
+    "충분히 잠을 자다",
+    "계획을 세우다",
+    "문제를 처리하다",
+    "~을 멀리하다"
+  ],
+  "get enough sleep": [
+    "휴식을 취하다",
+    "충분히 잠을 자다",
+    "계획을 꾸준히 지키다",
+    "공부 시간을 기록하다"
+  ],
+  "deal with": [
+    "계획을 계속 따르다",
+    "휴대전화를 멀리하다",
+    "~에 대처하거나 처리하다",
+    "충분히 잠을 자다"
+  ],
+  "stick to": [
+    "휴식을 취하다",
+    "기록을 확인하다",
+    "문제를 해결하다",
+    "계획이나 일과를 꾸준히 지키다"
+  ]
+};
+
+/* ==========================================
+   2. GAME STATE
+========================================== */
+
+let selectedCard = 0;
+let score = 0;
+let learned = new Set();
+
+const quizState = {
+  spelling: {
+    index: 0,
+    order: [],
+    attempts: 0,
+    completed: new Set(),
+    firstTryCorrect: new Set(),
+    locked: false
+  },
+  meaning: {
+    index: 0,
+    order: [],
+    attempts: 0,
+    completed: new Set(),
+    firstTryCorrect: new Set(),
+    locked: false
+  },
+  sentence: {
+    index: 0,
+    order: [],
+    attempts: 0,
+    completed: new Set(),
+    firstTryCorrect: new Set(),
+    locked: false
+  }
+};
+
+const $ = (id) => document.getElementById(id);
+
+function shuffle(array) {
+  const result = [...array];
+
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+
+  return result;
+}
+
+function normalize(text) {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[.!?,]/g, "")
+    .replace(/\s+/g, " ");
+}
+
+function addScore(points) {
+  score += points;
+  $("score").textContent = score;
+}
+
+function updateProgress() {
+  const total = 18;
+  const completed =
+    quizState.spelling.completed.size +
+    quizState.meaning.completed.size +
+    quizState.sentence.completed.size;
+
+  const percentage = Math.round((completed / total) * 100);
+
+  $("progressFill").style.width = percentage + "%";
+  $("progressText").textContent = percentage + "% complete";
+  $("progressBar").setAttribute("aria-valuenow", percentage);
+  $("learnedCount").textContent = learned.size;
+
+  document.querySelectorAll(".expression-card").forEach((card, i) => {
+    const status = card.querySelector(".card-status");
+
+    if (learned.has(i)) {
+      status.textContent = "✓ EXPLORED";
+    } else {
+      status.textContent = "TAP TO LEARN →";
+    }
+  });
+
+  if (completed === total) {
+    showFinalScreen();
+  }
+}
+
+/* ==========================================
+   3. EXPRESSION CARDS
+========================================== */
+
+function renderExpressionCards() {
+  const grid = $("expressionGrid");
+  grid.innerHTML = "";
+
+  expressions.forEach((item, index) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "expression-card";
+    card.setAttribute("aria-label", "Learn " + item.expression);
+
+    const number = document.createElement("span");
+    number.className = "card-number";
+    number.textContent = String(index + 1).padStart(2, "0");
+
+    const emoji = document.createElement("span");
+    emoji.className = "card-emoji";
+    emoji.textContent = item.emoji;
+
+    const expression = document.createElement("span");
+    expression.className = "card-expression";
+    expression.textContent = item.expression;
+
+    const meaning = document.createElement("span");
+    meaning.className = "card-meaning";
+    meaning.textContent = item.shortMeaning;
+
+    const status = document.createElement("span");
+    status.className = "card-status";
+    status.textContent = "TAP TO LEARN →";
+
+    card.append(number, emoji, expression, meaning, status);
+
+    card.addEventListener("click", () => {
+      selectedCard = index;
+      renderDetail();
+      $("detailPanel").scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    });
+
+    grid.appendChild(card);
+  });
+
+  updateActiveCard();
+}
+
+function updateActiveCard() {
+  document.querySelectorAll(".expression-card").forEach((card, index) => {
+    card.classList.toggle("active", index === selectedCard);
+    card.setAttribute(
+      "aria-pressed",
+      index === selectedCard ? "true" : "false"
+    );
+  });
+}
+
+function renderDetail() {
+  const item = expressions[selectedCard];
+
+  $("detailExpression").textContent = item.expression;
+  $("detailMeaning").textContent = item.meaning;
+  $("detailExample").textContent = item.example;
+  $("detailTranslation").textContent = item.translation;
+  $("detailTip").textContent = item.tip;
+  $("detailNumber").textContent =
+    String(selectedCard + 1).padStart(2, "0") + " / 06";
+
+  learned.add(selectedCard);
+  updateActiveCard();
+  updateProgress();
+}
+
+function moveCard(direction) {
+  selectedCard =
+    (selectedCard + direction + expressions.length) % expressions.length;
+  renderDetail();
+}
+
+$("prevCard").addEventListener("click", () => moveCard(-1));
+$("nextCard").addEventListener("click", () => moveCard(1));
+
+/* ==========================================
+   4. TEXT-TO-SPEECH
+========================================== */
+
+function speak(text, rate = 0.9) {
+  if (!("speechSynthesis" in window)) {
+    alert("Sorry! Your browser does not support text-to-speech.");
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "en-US";
+  utterance.rate = rate;
+  utterance.pitch = 1;
+
+  window.speechSynthesis.speak(utterance);
+}
+
+$("listenButton").addEventListener("click", () => {
+  speak(expressions[selectedCard].example, 0.9);
+});
+
+$("slowListenButton").addEventListener("click", () => {
+  speak(expressions[selectedCard].example, 0.65);
+});
+
+$("readStoryButton").addEventListener("click", () => {
+  const story =
+    "Jisoo wanted to improve her study habits before the exam period. " +
+    "She began to keep track of how long she studied each day. " +
+    "She also learned when to take a break instead of studying for too long. " +
+    "While studying, she tried to stay away from her phone and made sure to get enough sleep. " +
+    "When she felt stressed, she learned how to deal with it by taking a short walk. " +
+    "After several weeks, she found it easier to stick to her new routine.";
+
+  speak(story, 0.82);
+});
+
+/* ==========================================
+   5. QUIZ UTILITIES
+========================================== */
+
+function prepareQuiz(state) {
+  state.index = 0;
+  state.order = shuffle(expressions.map((_, i) => i));
+  state.attempts = 0;
+  state.completed = new Set();
+  state.firstTryCorrect = new Set();
+  state.locked = false;
+}
+
+function currentQuizExpression(state) {
+  return state.order[state.index];
+}
+
+function quizQuestionCount(state) {
+  return state.order.length;
+}
+
+function updateQuizCounter(prefix, state) {
+  $(prefix + "Counter").textContent =
+    "Question " + (state.index + 1) + " / " + quizQuestionCount(state);
+}
+
+function showFeedback(element, kind, title, message) {
+  element.className = "feedback show " + kind;
+  element.replaceChildren();
+
+  const strong = document.createElement("strong");
+  strong.textContent = title;
+
+  const body = document.createElement("span");
+  body.textContent = message;
+
+  element.append(strong, body);
+}
+
+function createChoice(text, letter, onClick) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "choice";
+
+  const badge = document.createElement("span");
+  badge.className = "choice-letter";
+  badge.textContent = letter;
+
+  const label = document.createElement("span");
+  label.textContent = text;
+
+  button.append(badge, label);
+  button.addEventListener("click", () => onClick(button, text));
+
+  return button;
+}
+
+/* ==========================================
+   6. SPELLING QUIZ
+========================================== */
+
+function renderSpellingQuiz() {
+  const state = quizState.spelling;
+  const index = currentQuizExpression(state);
+  const item = expressions[index];
+
+  state.locked = false;
+  state.attempts = 0;
+
+  $("spellingQuestion").textContent = item.spellingPrompt;
+  $("spellingInput").value = "";
+  $("spellingInput").disabled = false;
+  $("checkSpelling").disabled = false;
+  $("checkSpelling").classList.remove("hidden");
+
+  $("spellingFeedback").className = "feedback";
+  $("spellingFeedback").textContent = "";
+
+  $("spellingActions").classList.add("hidden");
+
+  updateQuizCounter("spelling", state);
+}
+
+$("spellingForm").addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const state = quizState.spelling;
+
+  if (state.locked) return;
+
+  const index = currentQuizExpression(state);
+  const item = expressions[index];
+  const input = $("spellingInput");
+  const answer = normalize(input.value);
+  const correct = normalize(item.expression);
+
+  if (!answer) {
+    showFeedback(
+      $("spellingFeedback"),
+      "try",
+      "Almost there! 💗",
+      "Type an answer before checking."
+    );
+    input.focus();
+    return;
+  }
+
+  state.attempts++;
+
+  if (answer === correct) {
+    state.locked = true;
+    state.completed.add(index);
+    state.firstTryCorrect.add(
+      state.attempts === 1 ? index : "retry-" + index
+    );
+
+    // A completed item earns points only once per question.
+    addScore(state.attempts === 1 ? 10 : 5);
+
+    showFeedback(
+      $("spellingFeedback"),
+      "good",
+      "Perfect spelling! ⭐",
+      item.expression + " = " + item.meaning +
+      ". Example: " + item.example
+    );
+
+    input.disabled = true;
+    $("checkSpelling").disabled = true;
+    $("spellingActions").classList.remove("hidden");
+    $("spellingRetry").classList.add("hidden");
+    $("spellingNext").textContent =
+      state.index === state.order.length - 1
+        ? "Finish Spelling →"
+        : "Next Question →";
+
+    updateProgress();
+  } else {
+    showFeedback(
+      $("spellingFeedback"),
+      "try",
+      "Not quite! 🌱",
+      "Hint: " + item.tip + " Check the spelling and try again."
+    );
+
+    $("spellingActions").classList.remove("hidden");
+    $("spellingRetry").classList.remove("hidden");
+    $("spellingNext").classList.add("hidden");
+    input.focus();
+  }
+});
+
+$("spellingRetry").addEventListener("click", () => {
+  $("spellingFeedback").className = "feedback";
+  $("spellingFeedback").textContent = "";
+  $("spellingActions").classList.add("hidden");
+  $("spellingInput").focus();
+});
+
+$("spellingNext").addEventListener("click", () => {
+  const state = quizState.spelling;
+
+  if (state.index < state.order.length - 1) {
+    state.index++;
+    renderSpellingQuiz();
+  }
+});
+
+/* ==========================================
+   7. MEANING QUIZ
+========================================== */
+
+function renderMeaningQuiz() {
+  const state = quizState.meaning;
+  const index = currentQuizExpression(state);
+  const item = expressions[index];
+
+  state.locked = false;
+  state.attempts = 0;
+
+  $("meaningQuestion").textContent = item.meaningQuestion;
+  $("meaningFeedback").className = "feedback";
+  $("meaningFeedback").textContent = "";
+  $("meaningActions").classList.add("hidden");
+
+  const correctMeaning = item.meaning;
+  const distractors = meaningDistractors[item.expression]
+    .filter(text => normalize(text) !== normalize(correctMeaning));
+
+  // Use the short, consistent Korean meaning list as the answer pool.
+  const answerOptions = shuffle([
+    { text: item.shortMeaning, correct: true },
+    ...shuffle(expressions.filter((_, i) => i !== index))
+      .slice(0, 3)
+      .map(other => ({
+        text: other.shortMeaning,
+        correct: false
+      }))
+  ]);
+
+  const choices = $("meaningChoices");
+  choices.innerHTML = "";
+
+  answerOptions.forEach((option, i) => {
+    const button = createChoice(
+      option.text,
+      String.fromCharCode(65 + i),
+      (clicked) => checkMeaningAnswer(clicked, option.correct, index)
+    );
+
+    choices.appendChild(button);
+  });
+
+  updateQuizCounter("meaning", state);
+}
+
+function checkMeaningAnswer(button, isCorrect, index) {
+  const state = quizState.meaning;
+
+  if (state.locked) return;
+
+  state.attempts++;
+
+  if (isCorrect) {
+    state.locked = true;
+    state.completed.add(index);
+
+    if (state.attempts === 1) {
+      state.firstTryCorrect.add(index);
+    }
+
+    addScore(state.attempts === 1 ? 10 : 5);
+    button.classList.add("correct");
+
+    showFeedback(
+      $("meaningFeedback"),
+      "good",
+      "That's right! 🌟",
+      expressions[index].expression + " means " +
+      expressions[index].meaning + ". " +
+      expressions[index].tip
+    );
+
+    document.querySelectorAll("#meaningChoices .choice").forEach(choice => {
+      choice.disabled = true;
+    });
+
+    $("meaningActions").classList.remove("hidden");
+    $("meaningRetry").classList.add("hidden");
+    $("meaningNext").textContent =
+      state.index === state.order.length - 1
+        ? "Finish Meaning Quiz →"
+        : "Next Question →";
+
+    updateProgress();
+  } else {
+    button.classList.add("wrong");
+
+    showFeedback(
+      $("meaningFeedback"),
+      "try",
+      "Good try! 💗",
+      "Think about the expression again. You can choose another answer!"
+    );
+
+    // Wrong answers remain selectable; the learner can try again.
+    button.disabled = true;
+  }
+}
+
+$("meaningRetry").addEventListener("click", () => {
+  $("meaningFeedback").className = "feedback";
+  $("meaningFeedback").textContent = "";
+  $("meaningActions").classList.add("hidden");
+});
+
+$("meaningNext").addEventListener("click", () => {
+  const state = quizState.meaning;
+
+  if (state.index < state.order.length - 1) {
+    state.index++;
+    renderMeaningQuiz();
+  }
+});
+
+/* ==========================================
+   8. SENTENCE CONTEXT QUIZ
+========================================== */
+
+function renderSentenceQuiz() {
+  const state = quizState.sentence;
+  const index = currentQuizExpression(state);
+  const item = expressions[index];
+
+  state.locked = false;
+  state.attempts = 0;
+
+  $("sentenceQuestion").textContent = item.sentence;
+  $("sentenceTranslation").textContent = item.sentenceTranslation;
+  $("sentenceFeedback").className = "feedback";
+  $("sentenceFeedback").textContent = "";
+  $("sentenceActions").classList.add("hidden");
+
+  const wrongOptions = shuffle(
+    expressions.filter((_, i) => i !== index)
+  ).slice(0, 3);
+
+  const options = shuffle([
+    { text: item.expression, correct: true },
+    ...wrongOptions.map(other => ({
+      text: other.expression,
+      correct: false
+    }))
+  ]);
+
+  const choices = $("sentenceChoices");
+  choices.innerHTML = "";
+
+  options.forEach((option, i) => {
+    const button = createChoice(
+      option.text,
+      String.fromCharCode(65 + i),
+      (clicked) => checkSentenceAnswer(clicked, option.correct, index)
+    );
+
+    choices.appendChild(button);
+  });
+
+  updateQuizCounter("sentence", state);
+}
+
+function checkSentenceAnswer(button, isCorrect, index) {
+  const state = quizState.sentence;
+
+  if (state.locked) return;
+
+  state.attempts++;
+
+  if (isCorrect) {
+    state.locked = true;
+    state.completed.add(index);
+
+    if (state.attempts === 1) {
+      state.firstTryCorrect.add(index);
+    }
+
+    addScore(state.attempts === 1 ? 10 : 5);
+    button.classList.add("correct");
+
+    const item = expressions[index];
+
+    showFeedback(
+      $("sentenceFeedback"),
+      "good",
+      "Case solved! 🔎",
+      item.sentenceExplanation + " Target expression: " +
+      item.expression + "."
+    );
+
+    document.querySelectorAll("#sentenceChoices .choice").forEach(choice => {
+      choice.disabled = true;
+    });
+
+    $("sentenceActions").classList.remove("hidden");
+    $("sentenceRetry").classList.add("hidden");
+    $("sentenceNext").textContent =
+      state.index === state.order.length - 1
+        ? "Finish Sentence Quiz →"
+        : "Next Question →";
+
+    updateProgress();
+  } else {
+    button.classList.add("wrong");
+
+    showFeedback(
+      $("sentenceFeedback"),
+      "try",
+      "Keep investigating! 🕵️",
+      "Read the sentence and Korean translation again. Choose another expression."
+    );
+
+    button.disabled = true;
+  }
+}
+
+$("sentenceRetry").addEventListener("click", () => {
+  $("sentenceFeedback").className = "feedback";
+  $("sentenceFeedback").textContent = "";
+  $("sentenceActions").classList.add("hidden");
+});
+
+$("sentenceNext").addEventListener("click", () => {
+  const state = quizState.sentence;
+
+  if (state.index < state.order.length - 1) {
+    state.index++;
+    renderSentenceQuiz();
+  }
+});
+
+/* ==========================================
+   9. COMPLETION AND RESTART
+========================================== */
+
+function showFinalScreen() {
+  const totalCorrect =
+    quizState.spelling.firstTryCorrect.size +
+    quizState.meaning.firstTryCorrect.size +
+    quizState.sentence.firstTryCorrect.size;
+
+  const totalQuestions = 18;
+  const accuracy = Math.round((totalCorrect / totalQuestions) * 100);
+
+  $("finalScreen").classList.remove("hidden");
+  $("finalScore").textContent = score;
+  $("finalCorrect").textContent = totalCorrect + "/" + totalQuestions;
+  $("finalAccuracy").textContent = accuracy + "%";
+
+  if (accuracy >= 85) {
+    $("finalEmoji").textContent = "🏆";
+    $("finalTitle").textContent = "Study-Habit Superstar!";
+    $("finalMessage").textContent =
+      "Fantastic work! You understand these expressions very well. " +
+      "Keep practicing and use them in your own English sentences!";
+  } else if (accuracy >= 60) {
+    $("finalEmoji").textContent = "🌟";
+    $("finalTitle").textContent = "You're Growing!";
+    $("finalMessage").textContent =
+      "Great effort! You are building your English skills. " +
+      "Review the expressions you found challenging and try again.";
+  } else {
+    $("finalEmoji").textContent = "🌱";
+    $("finalTitle").textContent = "Every Step Counts!";
+    $("finalMessage").textContent =
+      "Learning takes practice. Review your word cards and try again. " +
+      "You can do it, one expression at a time!";
+  }
+
+  $("finalScreen").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+$("reviewMissed").addEventListener("click", () => {
+  const missed = [];
+
+  for (const key of ["spelling", "meaning", "sentence"]) {
+    const state = quizState[key];
+
+    state.order.forEach(index => {
+      if (!state.firstTryCorrect.has(index)) {
+        missed.push(index);
+      }
+    });
+  }
+
+  const uniqueMissed = [...new Set(missed)];
+
+  if (uniqueMissed.length > 0) {
+    selectedCard = uniqueMissed[0];
+  } else {
+    selectedCard = 0;
+  }
+
+  renderDetail();
+
+  $("detailPanel").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+});
+
+function restartApp() {
+  score = 0;
+  learned = new Set();
+  selectedCard = 0;
+
+  prepareQuiz(quizState.spelling);
+  prepareQuiz(quizState.meaning);
+  prepareQuiz(quizState.sentence);
+
+  $("score").textContent = "0";
+  $("finalScreen").classList.add("hidden");
+
+  renderExpressionCards();
+  renderDetail();
+  renderSpellingQuiz();
+  renderMeaningQuiz();
+  renderSentenceQuiz();
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+$("restartButton").addEventListener("click", restartApp);
+
+/* ==========================================
+   10. START THE APP
+========================================== */
+
+function init() {
+  prepareQuiz(quizState.spelling);
+  prepareQuiz(quizState.meaning);
+  prepareQuiz(quizState.sentence);
+
+  renderExpressionCards();
+  renderDetail();
+  renderSpellingQuiz();
+  renderMeaningQuiz();
+  renderSentenceQuiz();
+}
+
+init();
+</script>
+</body>
+</html>
+```
